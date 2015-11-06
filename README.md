@@ -1,4 +1,4 @@
-Dump / Backup a MySQL database
+Dump / Backup a MySQL container database in gzip format
 ============================
 You can backup your MySQL database by this container that running mysqldump tool after an interval of N seconds.
 
@@ -36,8 +36,8 @@ Example:
     --link /mysql-test:mysql \
     particles/backup-mysql
 
-backup-mysql container settings:
-
+Settings:
+--------------------------------
 `BACKUP_INTERVAL`: interval between backups expressed in seconds, without that will be used a default value of 24 hours (3600*24). First backup and interval start from the container run
 
 `/host/path/backup`: set host path to save backups, don't change container default folder (*/var/backups/*)
@@ -55,4 +55,5 @@ Check your host folder to find database dump in gzip format
 
     ls -l /path/where/backup/mysql/
     mydb.sql.gz
+
 
