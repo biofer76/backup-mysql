@@ -33,6 +33,7 @@ Example:
     --name backup-mysql \
     --env BACKUP_INTERVAL=300 \
     -v /host/path/backup:/var/backups \
+    --env MYSQL_DATABASE=mydb
     --link /mysql-test:mysql \
     particles/backup-mysql
 
@@ -41,6 +42,9 @@ Settings:
 `BACKUP_INTERVAL`: interval between backups expressed in seconds, without that will be used a default value of 24 hours (3600*24). First backup and interval start from the container run
 
 `/host/path/backup`: set host path to save backups, don't change container default folder (*/var/backups/*)
+
+`MYSQL_DATABASE`: Environment variable you can use in backup or mysql container (backup container env variable has priority)
+
 
 After running backup container you can check logs:
 
@@ -55,5 +59,4 @@ Check your host folder to find database dump in gzip format
 
     ls -l /path/where/backup/mysql/
     mydb.sql.gz
-
 
