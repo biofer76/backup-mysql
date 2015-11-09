@@ -19,10 +19,19 @@ interval=$BACKUP_INTERVAL
 # MySQL configuration
 dbhost=$MYSQL_PORT_3306_TCP_ADDR
 dbport=$MYSQL_PORT_3306_TCP_PORT
-dbname=$MYSQL_ENV_MYSQL_DATABASE
 dbuser="root"
 dbpass=$MYSQL_ENV_MYSQL_ROOT_PASSWORD
 dbfolder="/var/backups"
+
+// Get DBNAME
+if [ -n "$MYSQL_DATABASE" ]; then
+	dbname=$MYSQL_DATABASE
+elif [ -n "$MYSQL_ENV_MYSQL_DATABASE" ]; then
+	dbname=$MYSQL_ENV_MYSQL_DATABASE
+else
+	echo "ERROR: No database name found, set MYSQL_DATABASE environment variable"
+	exit 0
+fi
 
 echo "Starting MySQL backup script for database $dbname with an interval of $interval seconds "
 
